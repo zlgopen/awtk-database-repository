@@ -76,21 +76,6 @@ static int on_sql_select_result(void* data, int argc, char** argv, char** azColN
   return SQLITE_OK;
 }
 
-static ret_t repository_sqlite3_select(repository_t* r, const char* sql) {
-  select_info_t info = {r, 0};
-  repository_clear_cache(r);
-
-  return repository_sqlite3_exec_sql_ex(r, sql, on_sql_select_result, &info);
-}
-
-static uint32_t repository_sqlite3_count(repository_t* r, const char* sql) {
-  uint32_t count = 0;
-
-  repository_sqlite3_exec_sql_ex(r, sql, on_sql_count_result, &count);
-
-  return count;
-}
-
 static ret_t repository_sqlite3_exec_sql_ex(repository_t* r, const char* sql,
                                             on_sqlite3_callback_t on_sql_result, void* ctx) {
   char* zErrMsg = NULL;
@@ -104,6 +89,22 @@ static ret_t repository_sqlite3_exec_sql_ex(repository_t* r, const char* sql,
   }
 
   return rc == SQLITE_OK ? RET_OK : RET_FAIL;
+}
+
+
+static ret_t repository_sqlite3_select(repository_t* r, const char* sql) {
+  select_info_t info = {r, 0};
+  repository_clear_cache(r);
+
+  return repository_sqlite3_exec_sql_ex(r, sql, on_sql_select_result, &info);
+}
+
+static uint32_t repository_sqlite3_count(repository_t* r, const char* sql) {
+  uint32_t count = 0;
+
+  repository_sqlite3_exec_sql_ex(r, sql, on_sql_count_result, &count);
+
+  return count;
 }
 
 static ret_t repository_sqlite3_exec_sql(repository_t* r, const char* sql) {

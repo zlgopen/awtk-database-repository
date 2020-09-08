@@ -69,14 +69,6 @@ static ret_t student_list_on_trans_rollback(void* ctx, event_t* e) {
   return RET_OK;
 }
 
-static ret_t student_list_on_reload(void* ctx, event_t* e) {
-  repository_t* repository = (repository_t*)ctx;
-  widget_t* win = widget_get_window(WIDGET(e->target));
-  student_list_reload(win, repository);
-
-  return RET_OK;
-}
-
 static table_row_t* table_row_of(widget_t* child) {
   widget_t* iter = child;
   while (iter != NULL && !tk_str_eq(widget_get_type(iter), WIDGET_TYPE_TABLE_ROW)) {
@@ -122,7 +114,6 @@ static ret_t student_list_on_memo_changed(void* ctx, event_t* e) {
 }
 
 static ret_t student_list_on_remove(void* ctx, event_t* e) {
-  widget_t* target = WIDGET(e->target);
   repository_t* repository = (repository_t*)ctx;
   table_row_t* row = table_row_of(WIDGET(e->target));
   widget_t* win = widget_get_window(WIDGET(e->target));
