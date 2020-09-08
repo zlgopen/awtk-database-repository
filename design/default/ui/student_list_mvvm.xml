@@ -1,0 +1,51 @@
+<window theme="main" v-model="student_list">
+  <view x="10" y="10" w="-20" h="80" children_layout="default(r=2,c=6,s=5,m=5)">
+    <label text="Filter"/>
+    <edit v-data:text="{filter}"/>
+    <label text="SortBy"/>
+    <edit v-data:text="{orderby}"/>
+    <label text="Start"/>
+    <edit v-data:text="{start_row}"/>
+    <label text="Rows"/>
+    <edit v-data:text="{limit}"/>
+    <check_button text="Asceding" v-data:value="{ascending}"/>
+    <button name="search" text="Search" v-on:click="{search}"/>
+  </view>
+
+  <table_view x="10" y="90" w="-20" h="-150">
+    <table_header x="0"  y="0" w="-12" h="30" name="title" children_layout="default(rows=1,cols=0,s=4)">
+      <label w="8%" text="Index"/>
+      <label w="30%" text="Name"/>
+      <label w="10%" text="Chinese"/>
+      <label w="10%" text="Math"/>
+      <label w="10%" text="English"/>
+      <label w="24%" text="Memo"/>
+      <label w="8%" text="Action"/>
+    </table_header>
+
+    <table_client name="table_client" x="0"  y="30" w="-12" h="-30" row_height="40" v-data:rows="{items}">
+      <table_row w="100%" h="40" children_layout="default(rows=1,cols=0,s=4)">
+       <slidable_row  w="100%" h="100%">
+         <column children_layout="default(rows=1,cols=0,s=4)">
+          <label w="8%" h="100%" v-data:text="{index}"/>
+          <label w="30%" h="100%" v-data:text="{item.name}"/>
+          <label w="10%" h="100%" v-data:text="{item.Chinese}"/>
+          <label w="10%" h="100%" v-data:text="{item.Math}"/>
+          <label w="10%" h="100%" v-data:text="{item.English}"/>
+          <label w="24%" h="100%" v-data:text="{item.memo}"/>
+        </column>
+        <button w="80" v-on:click="{detail}" tr_text="Detail" />
+        <button w="80" v-on:click="{edit}" tr_text="Edit" />
+        <confirmable_button w="80" v-on:click="{remove}" style="remove" tr_text="Remove" popup_win_w="260"/>
+       </slidable_row>
+
+      </table_row>
+    </table_client>
+    <scroll_bar_d name="vbar" x="right" y="0" w="12" h="100%" value="0"/>
+  </table_view>
+  <view x="10" y="b:10" w="-20" h="40" children_layout="default(r=1,c=3,s=5,m=5)">
+    <button name="clear" text="Clear" v-on:click="{clear}"/>
+    <button name="add" text="Add" v-on:click="{add}"/>
+    <button name="quit" text="Quit" v-on:click="{nothing, CloseWindow=True, QuitApp=true}"/>
+  </view>
+</window>

@@ -1,0 +1,687 @@
+[
+  {
+    "type": "class",
+    "methods": [
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "获取缓存记录条数。",
+        "name": "repository_get_cache_nr",
+        "return": {
+          "type": "uint32_t",
+          "desc": "返回缓存记录条数。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          },
+          {
+            "type": "uint32_t",
+            "name": "o",
+            "desc": "index 序数。"
+          }
+        ],
+        "annotation": {},
+        "desc": "获取指定序数的缓存记录。",
+        "name": "repository_get_cache_object",
+        "return": {
+          "type": "object_t*",
+          "desc": "返回NULL表示失败，否则返回对应的记录。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          },
+          {
+            "type": "object_t*",
+            "name": "o",
+            "desc": "数据记录对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "插入一条记录。",
+        "name": "repository_insert",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          },
+          {
+            "type": "object_t*",
+            "name": "o",
+            "desc": "数据记录对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "更新一条记录。",
+        "name": "repository_update",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          },
+          {
+            "type": "object_t*",
+            "name": "o",
+            "desc": "数据记录对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "删除一条记录。",
+        "name": "repository_remove",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "删除全部数据。",
+        "name": "repository_clear",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          },
+          {
+            "type": "object_t*",
+            "name": "o",
+            "desc": "数据记录对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "检查一条记录是否已经存在。",
+        "name": "repository_exist",
+        "return": {
+          "type": "bool_t",
+          "desc": "返回TRUE表示存在，否则表示不存在。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          },
+          {
+            "type": "const char*",
+            "name": "sql",
+            "desc": "SQL语句。"
+          }
+        ],
+        "annotation": {},
+        "desc": "执行SQL语句",
+        "name": "repository_exec_sql",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "开始事务。",
+        "name": "repository_trans_begin",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "提交事务。",
+        "name": "repository_trans_commit",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "回滚事务。",
+        "name": "repository_trans_rollback",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          },
+          {
+            "type": "const char*",
+            "name": "sql",
+            "desc": "SQL语句。"
+          }
+        ],
+        "annotation": {},
+        "desc": "查询更新缓存",
+        "name": "repository_select",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          },
+          {
+            "type": "const char*",
+            "name": "sql",
+            "desc": "SQL语句。"
+          }
+        ],
+        "annotation": {},
+        "desc": "统计满足条件的记录条数。",
+        "name": "repository_count",
+        "return": {
+          "type": "uint32_t",
+          "desc": "返回满足条件的记录条数。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          },
+          {
+            "type": "uint32_t",
+            "name": "index",
+            "desc": "缓存对象的序数。"
+          }
+        ],
+        "annotation": {},
+        "desc": "删除一条记录。",
+        "name": "repository_remove_index",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "创建一个空对象。",
+        "name": "repository_create_object",
+        "return": {
+          "type": "object_t*",
+          "desc": "返回NULL表示失败，否则返回新建的对象。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "清除全部缓存。",
+        "name": "repository_clear_cache",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          },
+          {
+            "type": "object_t*",
+            "name": "o",
+            "desc": "数据记录对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "增加一条记录到缓存。",
+        "name": "repository_add_cache",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          },
+          {
+            "type": "object_t*",
+            "name": "o",
+            "desc": "数据记录对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "删除一条缓存记录。",
+        "name": "repository_remove_cache",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "销毁repository对象。",
+        "name": "repository_destroy",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      }
+    ],
+    "events": [],
+    "properties": [],
+    "header": "repository/repository.h",
+    "desc": "repository对sql数据库的封装。",
+    "name": "repository_t",
+    "level": 1
+  },
+  {
+    "type": "class",
+    "methods": [
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          }
+        ],
+        "annotation": {
+          "constructor": true
+        },
+        "desc": "创建repository view model对象。",
+        "name": "view_model_repository_create_with",
+        "return": {
+          "type": "view_model_t",
+          "desc": "返回view_model_t对象。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "view_model_repository_t*",
+            "name": "vm",
+            "desc": "view_model对象。"
+          },
+          {
+            "type": "const char*",
+            "name": "filter",
+            "desc": "过滤条件。"
+          }
+        ],
+        "annotation": {},
+        "desc": "设置过滤条件(SQL的WHERE语句)。",
+        "name": "view_model_repository_set_filter",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "view_model_repository_t*",
+            "name": "vm",
+            "desc": "view_model对象。"
+          },
+          {
+            "type": "const char*",
+            "name": "fields",
+            "desc": "选择的字段。"
+          }
+        ],
+        "annotation": {},
+        "desc": "设置选择的字段(缺省为全部即*)。",
+        "name": "view_model_repository_set_fields",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "view_model_repository_t*",
+            "name": "vm",
+            "desc": "view_model对象。"
+          },
+          {
+            "type": "const char*",
+            "name": "orderby",
+            "desc": "排序的字段。"
+          }
+        ],
+        "annotation": {},
+        "desc": "设置排序的字段。",
+        "name": "view_model_repository_set_orderby",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "view_model_repository_t*",
+            "name": "vm",
+            "desc": "view_model对象。"
+          },
+          {
+            "type": "bool_t",
+            "name": "ascending",
+            "desc": "是否升序。"
+          }
+        ],
+        "annotation": {},
+        "desc": "设置升序排序。",
+        "name": "view_model_repository_set_ascending",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "view_model_repository_t*",
+            "name": "vm",
+            "desc": "view_model对象。"
+          },
+          {
+            "type": "int32_t",
+            "name": "limit",
+            "desc": "条数限制。"
+          }
+        ],
+        "annotation": {},
+        "desc": "设置查询条数限制。",
+        "name": "view_model_repository_set_limit",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "view_model_repository_t*",
+            "name": "vm",
+            "desc": "view_model对象。"
+          },
+          {
+            "type": "int32_t",
+            "name": "start_row",
+            "desc": "查询开始位置。"
+          }
+        ],
+        "annotation": {},
+        "desc": "设置查询开始位置。",
+        "name": "view_model_repository_set_start_row",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "view_model_repository_t*",
+            "name": "vm",
+            "desc": "view_model对象。"
+          },
+          {
+            "type": "const char*",
+            "name": "window_name",
+            "desc": "窗口名称。"
+          }
+        ],
+        "annotation": {},
+        "desc": "设置新增记录的窗口名称。",
+        "name": "view_model_repository_set_window_name_of_add",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "view_model_repository_t*",
+            "name": "vm",
+            "desc": "view_model对象。"
+          },
+          {
+            "type": "const char*",
+            "name": "window_name",
+            "desc": "窗口名称。"
+          }
+        ],
+        "annotation": {},
+        "desc": "设置编辑记录的窗口名称。",
+        "name": "view_model_repository_set_window_name_of_edit",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "view_model_repository_t*",
+            "name": "vm",
+            "desc": "view_model对象。"
+          },
+          {
+            "type": "const char*",
+            "name": "window_name",
+            "desc": "窗口名称。"
+          }
+        ],
+        "annotation": {},
+        "desc": "设置查看记录的窗口名称。",
+        "name": "view_model_repository_set_window_name_of_detail",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "view_model_repository_t*",
+            "name": "vm",
+            "desc": "view_model对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "按当前条件进行查询。",
+        "name": "view_model_repository_search",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "view_model_repository_t*",
+            "name": "vm",
+            "desc": "view_model对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "把view_model对象转view_model_repository对象。",
+        "name": "view_model_repository_cast",
+        "return": {
+          "type": "view_model_repository_t*",
+          "desc": "返回view_model_repository对象。"
+        }
+      }
+    ],
+    "events": [],
+    "properties": [],
+    "header": "repository/view_model_repository.h",
+    "desc": "view model of repository",
+    "name": "view_model_repository_t",
+    "level": 1
+  },
+  {
+    "type": "class",
+    "methods": [
+      {
+        "params": [
+          {
+            "type": "sqlite3*",
+            "name": "db",
+            "desc": "数据库对象。"
+          },
+          {
+            "type": "const char*",
+            "name": "table_name",
+            "desc": "数据库表名。"
+          },
+          {
+            "type": "const char*",
+            "name": "primary_key",
+            "desc": "数据库主键名。"
+          }
+        ],
+        "annotation": {},
+        "desc": "创建repository对象。",
+        "name": "repository_sqlite3_create",
+        "return": {
+          "type": "repository_t*",
+          "desc": "返回NULL表示失败，否则返回repository对象。"
+        }
+      }
+    ],
+    "events": [],
+    "properties": [],
+    "header": "sqlite3/repository_sqlite3.h",
+    "desc": "sqlite3实现的repository。",
+    "name": "repository_sqlite3_t",
+    "level": 1
+  },
+  {
+    "type": "class",
+    "methods": [
+      {
+        "params": [
+          {
+            "type": "navigator_request_t*",
+            "name": "req",
+            "desc": "req对象。"
+          }
+        ],
+        "annotation": {},
+        "desc": "创建view_model对象。",
+        "name": "view_model_record_create",
+        "return": {
+          "type": "view_model_t*",
+          "desc": "返回view_model对象。"
+        }
+      }
+    ],
+    "events": [],
+    "properties": [],
+    "header": "repository/view_model_record.h",
+    "desc": "record的查看、编辑和增加。",
+    "name": "view_model_record_t",
+    "parent": "view_model_t",
+    "level": 2
+  }
+]

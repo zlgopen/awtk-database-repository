@@ -1,0 +1,35 @@
+LIBRARY   repository
+EXPORTS
+    repository_get_cache_nr @1
+    repository_get_cache_object @2
+    repository_insert @3
+    repository_update @4
+    repository_remove @5
+    repository_clear @6
+    repository_exist @7
+    repository_exec_sql @8
+    repository_trans_begin @9
+    repository_trans_commit @10
+    repository_trans_rollback @11
+    repository_select @12
+    repository_count @13
+    repository_remove_index @14
+    repository_create_object @15
+    repository_clear_cache @16
+    repository_add_cache @17
+    repository_remove_cache @18
+    repository_destroy @19
+    view_model_repository_create_with @20
+    view_model_repository_set_filter @21
+    view_model_repository_set_fields @22
+    view_model_repository_set_orderby @23
+    view_model_repository_set_ascending @24
+    view_model_repository_set_limit @25
+    view_model_repository_set_start_row @26
+    view_model_repository_set_window_name_of_add @27
+    view_model_repository_set_window_name_of_edit @28
+    view_model_repository_set_window_name_of_detail @29
+    view_model_repository_search @30
+    view_model_repository_cast @31
+    repository_sqlite3_create @32
+    view_model_record_create @33

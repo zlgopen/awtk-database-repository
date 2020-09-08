@@ -1,0 +1,19 @@
+<window  anim_hint="htranslate" text="Edit" v-model="record" children_layout="default(h=40,c=2,m=5,s=10)">
+ <label text="Name:"/>
+ <label name="name" v-data:text="{name}}"/>
+
+ <label text="Chinese:"/>
+ <edit input_type="int" min="0" max="100" v-data:text="{Chinese, Trigger=Changing}}"/>
+
+ <label text="Math:"/>
+ <edit input_type="int" min="0" max="100" v-data:text="{Math, Trigger=Changing}}"/>
+
+ <label text="English:"/>
+ <edit input_type="int" min="0" max="100" v-data:text="{English, Trigger=Changing}}"/>
+ 
+ <label text="Memo:"/>
+ <edit v-data:text="{memo, Trigger=Changing}}"/>
+  
+ <button name="save" text="Save" v-on:click="{save, CloseWindow=true}"/>
+ <button name="cancel" text="Cancel" v-on:click="{nothing, CloseWindow=true}"/>
+</window>

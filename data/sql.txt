@@ -1,0 +1,7 @@
+﻿CREATE TABLE scores(
+  "name" TEXT NOT NULL PRIMARY KEY,
+  "Chinese" integer,
+  "English" integer,
+  "Math" integer,
+  "memo" TEXT
+);

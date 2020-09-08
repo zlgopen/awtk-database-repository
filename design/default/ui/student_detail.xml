@@ -1,0 +1,18 @@
+<window  anim_hint="htranslate" text="User Detail" v-model="record" children_layout="default(h=40,c=2,m=5,s=10)">
+  <label text="Name:"/>
+  <label v-data:text="{name}"/>
+
+ <label text="Chinese:"/>
+ <label  v-data:text="{Chinese}"/>
+ 
+ <label text="Math:"/>
+ <label  v-data:text="{Math}"/>
+ 
+ <label text="English:"/>
+ <label  v-data:text="{English}"/>
+ 
+ <label text="Memo:"/>
+ <label  v-data:text="{memo}"/>
+
+ <button floating="true" x="c" y="b:10" w="80" h="30" text="Back" v-on:click="{nothing, CloseWindow=true}"/>
+</window>
