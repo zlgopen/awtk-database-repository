@@ -137,7 +137,7 @@ static ret_t student_list_on_create_row(void* ctx, uint32_t index, widget_t* row
 ret_t application_init(void) {
   table_view_register();
   slidable_row_register();
-  app_info_init("data/scores.db");
+  app_info_init("student_list", "students.db");
   widget_t* win = window_open("student_list");
   repository_t* repository = repository_sqlite3_create(s_app_info.db, "scores", "name");
   widget_t* client = widget_lookup(win, "table_client", TRUE);

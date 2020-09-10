@@ -50,7 +50,7 @@ view_model_t *student_list_view_model_create(navigator_request_t *req) {
 }
 
 ret_t application_init(void) {
-  app_info_init("data/scores.db");
+  app_info_init("student_list_mvvm", "students.db");
 
   mvvm_init();
   table_view_register();

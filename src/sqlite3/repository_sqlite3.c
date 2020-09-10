@@ -84,7 +84,7 @@ static ret_t repository_sqlite3_exec_sql_ex(repository_t* r, const char* sql,
   log_debug("%d:%s\n", rc, sql);
 
   if (zErrMsg != NULL) {
-    log_warn("Sqlite3 error: %s", zErrMsg);
+    log_warn("Sqlite3 error: %s\n", zErrMsg);
     sqlite3_free(zErrMsg);
   }
 

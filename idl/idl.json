@@ -1,5 +1,36 @@
 [
   {
+    "params": [
+      {
+        "type": "const char*",
+        "name": "appname",
+        "desc": "应用程序的名称。"
+      },
+      {
+        "type": "const char*",
+        "name": "dbname",
+        "desc": "数据库名称。"
+      },
+      {
+        "type": "char*",
+        "name": "dbfilename",
+        "desc": "数据库完整文件名。"
+      }
+    ],
+    "annotation": {
+      "global": true
+    },
+    "desc": "准备数据库文件。\n通常我们在资源中放一个初始的数据库文件，里面有缺省的表和数据。\n本函数用于确定数据库文件名，如果数据库文件不存在，从资源中取出初始的数据库文件，拷贝到用户运行目录。",
+    "name": "prepare_database_file",
+    "return": {
+      "type": "ret_t",
+      "desc": "返回RET_OK表示成功，否则表示失败。"
+    },
+    "type": "method",
+    "header": "src/database_asset_helper.h",
+    "level": 1
+  },
+  {
     "type": "class",
     "methods": [
       {
