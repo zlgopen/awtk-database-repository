@@ -10,24 +10,60 @@
         "type": "const char*",
         "name": "dbname",
         "desc": "数据库名称。"
-      },
-      {
-        "type": "char*",
-        "name": "dbfilename",
-        "desc": "数据库完整文件名。"
       }
     ],
     "annotation": {
       "global": true
     },
-    "desc": "准备数据库文件。\n通常我们在资源中放一个初始的数据库文件，里面有缺省的表和数据。\n本函数用于确定数据库文件名，如果数据库文件不存在，从资源中取出初始的数据库文件，拷贝到用户运行目录。",
-    "name": "prepare_database_file",
+    "desc": "初始化数据库。\n\n通常我们在资源中放一个初始的数据库文件，里面有缺省的表和数据。\n本函数检查数据库文件是否存在，如果不存在，就从资源中取出初始的数据库文件，拷贝到用户运行目录。\n然后打开数据库。",
+    "name": "app_database_init",
     "return": {
       "type": "ret_t",
       "desc": "返回RET_OK表示成功，否则表示失败。"
     },
     "type": "method",
-    "header": "src/database_asset_helper.h",
+    "header": "src/app_database.h",
+    "level": 1
+  },
+  {
+    "params": [
+      {
+        "type": "const char*",
+        "name": "table",
+        "desc": "表名。"
+      },
+      {
+        "type": "const char*",
+        "name": "primary_key",
+        "desc": "主键。"
+      }
+    ],
+    "annotation": {
+      "global": true
+    },
+    "desc": "创建repository对象。",
+    "name": "app_database_create_repository",
+    "return": {
+      "type": "repository_t*",
+      "desc": "返回repository对象。"
+    },
+    "type": "method",
+    "header": "src/app_database.h",
+    "level": 1
+  },
+  {
+    "params": [],
+    "annotation": {
+      "global": true
+    },
+    "desc": "关闭数据库。",
+    "name": "app_database_deinit",
+    "return": {
+      "type": "ret_t",
+      "desc": "返回RET_OK表示成功，否则表示失败。"
+    },
+    "type": "method",
+    "header": "src/app_database.h",
     "level": 1
   },
   {

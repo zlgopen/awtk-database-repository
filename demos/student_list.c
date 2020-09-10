@@ -1,5 +1,6 @@
 ﻿#include "awtk.h"
 
+#include "app_database.h"
 #include "repository/repository.h"
 #include "slidable_row_register.h"
 #include "table_view_register.h"
@@ -12,7 +13,6 @@
 #define COL_CHINESE "Chinese"
 #define COL_ENGLISH "English"
 
-#include "app_info.inc"
 
 static ret_t student_list_reload(widget_t* win, repository_t* repository) {
   widget_t* client = widget_lookup_by_type(win, WIDGET_TYPE_TABLE_CLIENT, TRUE);
@@ -137,9 +137,9 @@ static ret_t student_list_on_create_row(void* ctx, uint32_t index, widget_t* row
 ret_t application_init(void) {
   table_view_register();
   slidable_row_register();
-  app_info_init("student_list", "students.db");
+  app_database_init("student_list", "students.db");
   widget_t* win = window_open("student_list");
-  repository_t* repository = repository_sqlite3_create(s_app_info.db, "scores", "name");
+  repository_t* repository = app_database_create_repository("scores", "name");
   widget_t* client = widget_lookup(win, "table_client", TRUE);
 
   widget_child_on(win, "clear", EVT_CLICK, student_list_on_clear, repository);
@@ -160,7 +160,7 @@ ret_t application_init(void) {
  * 退出
  */
 ret_t application_exit(void) {
-  app_info_deinit();
+  app_database_deinit();
   return RET_OK;
 }
 
