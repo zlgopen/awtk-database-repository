@@ -52,13 +52,34 @@ typedef struct _view_model_repository_t {
   char* window_name_of_detail;
 } view_model_repository_t;
 
-#define VIEW_MODEL_REPOSITORY_CMD_SEARCH "search"
+/**
+ * 支持下列属性 + 和数据记录中的字段。
+ * 数据记录中的字段和下面的属性不能冲突。
+ */
+/*限制最多加载的条数*/
 #define VIEW_MODEL_REPOSITORY_PROP_LIMIT "limit"
+/*过滤条件。缺省不过滤，加载全部。*/
 #define VIEW_MODEL_REPOSITORY_PROP_FILTER "filter"
+/*加载的字段。缺省*，加载全部。*/
 #define VIEW_MODEL_REPOSITORY_PROP_FIELDS "fields"
+/*排序方式，缺省主键。*/
 #define VIEW_MODEL_REPOSITORY_PROP_orderby "orderby"
+/*是否升序排列。*/
 #define VIEW_MODEL_REPOSITORY_PROP_ASCENDING "ascending"
+/*从指定行查询数据。*/
 #define VIEW_MODEL_REPOSITORY_PROP_START_ROW "start_row"
+
+/**
+ * 支持下列的命令 
+ */
+
+/*用当前条件查询*/
+#define VIEW_MODEL_REPOSITORY_CMD_SEARCH "search"
+/*add: 新建记录。*/
+/*clear: 清除全部数据。*/
+/*remove: 删除当前记录。*/
+/*edit: 编辑当前记录。*/
+/*detail: 查看当前记录。*/
 
 /**
  * @method view_model_repository_create_with

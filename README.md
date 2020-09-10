@@ -88,4 +88,6 @@ bin/student_list_mvvm
 
 ## 参考
 
+* [具体用法](docs/index.md)
+
 * [awtk-mvvm](https://github.com/zlgopen/awtk-mvvm)

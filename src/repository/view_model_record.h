@@ -35,6 +35,15 @@ typedef struct _view_model_record_t view_model_record_t;
  * @parent view_model_t
  *
  * record的查看、编辑和增加。
+ * 
+ * 支持的属性：
+ * 
+ * 由数据库表本身的字段决定。
+ * 
+ * 支持的命令：
+ * 
+ * add 用于新增记录。
+ * save 用于更新记录。
  *
  */
 struct _view_model_record_t {
