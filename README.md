@@ -66,6 +66,13 @@ git clone https://github.com/zlgopen/awtk-widget-slidable-row.git
 cd awtk-widget-slidable-row; scons; cd -
 ```
 
+7. 获取 awtk-csv-file 并编译
+
+```
+git clone https://github.com/zlgopen/awtk-csv-file.git
+cd awtk-csv-file; scons; cd -
+```
+
 ## 运行
 
 1. 生成示例代码的资源
