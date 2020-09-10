@@ -2,6 +2,26 @@
 
 通过 repository 模式对关系数据库系统 (RDBMS) 的简单封装，并提供 view_model 实现，无需编写代码即可实现对数据的增删改查。
 
+* 主界面
+
+![](docs/images/main.png)
+
+* 菜单
+
+![](docs/images/main1.png)
+
+* 新建
+
+![](docs/images/add.png)
+
+* 修改
+
+![](docs/images/edit.png)
+
+* 详情
+
+![](docs/images/detail.png)
+
 ## 准备
 
 1. 获取 awtk 并编译
