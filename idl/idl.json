@@ -746,7 +746,7 @@
     "events": [],
     "properties": [],
     "header": "repository/view_model_record.h",
-    "desc": "record的查看、编辑和增加。",
+    "desc": "record的查看、编辑和增加。\n\n支持的属性：\n\n由数据库表本身的字段决定。\n\n支持的命令：\n\nadd 用于新增记录。\nsave 用于更新记录。",
     "name": "view_model_record_t",
     "parent": "view_model_t",
     "level": 2

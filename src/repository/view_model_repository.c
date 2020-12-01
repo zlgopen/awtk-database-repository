@@ -23,6 +23,7 @@
 #include "tkc/utils.h"
 #include "mvvm/base/utils.h"
 #include "view_model_repository.h"
+#include "mvvm/base/navigator.h"
 #include "mvvm/base/navigator_request.h"
 #include "repository/repository_mvvm_const.h"
 
@@ -108,10 +109,7 @@ static ret_t view_model_repository_get_prop(object_t* obj, const char* name, val
 }
 
 static bool_t view_model_repository_can_exec(object_t* obj, const char* name, const char* args) {
-  uint32_t index = tk_atoi(args);
-  view_model_t* view_model = VIEW_MODEL(obj);
   view_model_repository_t* vm = (view_model_repository_t*)(obj);
-  repository_t* r = vm->r;
 
   if (tk_str_ieq(OBJECT_CMD_CLEAR, name)) {
     return TRUE;
@@ -200,9 +198,6 @@ ret_t view_model_repository_search(view_model_repository_t* vm) {
 }
 
 static ret_t view_model_repository_exec(object_t* obj, const char* name, const char* args) {
-  uint32_t index = tk_atoi(args);
-  view_model_t* view_model = VIEW_MODEL(obj);
-
   view_model_repository_t* vm = (view_model_repository_t*)(obj);
   repository_t* r = vm->r;
 

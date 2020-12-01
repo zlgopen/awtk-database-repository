@@ -1,38 +1,38 @@
 LIBRARY   repository
 EXPORTS
-    app_database_init @1
-    app_database_create_repository @2
-    app_database_deinit @3
-    repository_get_cache_nr @4
-    repository_get_cache_object @5
-    repository_insert @6
-    repository_update @7
-    repository_remove @8
-    repository_clear @9
-    repository_exist @10
-    repository_exec_sql @11
-    repository_trans_begin @12
-    repository_trans_commit @13
-    repository_trans_rollback @14
-    repository_select @15
-    repository_count @16
-    repository_remove_index @17
-    repository_create_object @18
-    repository_clear_cache @19
-    repository_add_cache @20
-    repository_remove_cache @21
-    repository_destroy @22
-    view_model_repository_create_with @23
-    view_model_repository_set_filter @24
-    view_model_repository_set_fields @25
-    view_model_repository_set_orderby @26
-    view_model_repository_set_ascending @27
-    view_model_repository_set_limit @28
-    view_model_repository_set_start_row @29
-    view_model_repository_set_window_name_of_add @30
-    view_model_repository_set_window_name_of_edit @31
-    view_model_repository_set_window_name_of_detail @32
-    view_model_repository_search @33
-    view_model_repository_cast @34
-    repository_sqlite3_create @35
-    view_model_record_create @36
+    app_database_init
+    app_database_create_repository
+    app_database_deinit
+    repository_get_cache_nr
+    repository_get_cache_object
+    repository_insert
+    repository_update
+    repository_remove
+    repository_clear
+    repository_exist
+    repository_exec_sql
+    repository_trans_begin
+    repository_trans_commit
+    repository_trans_rollback
+    repository_select
+    repository_count
+    repository_remove_index
+    repository_create_object
+    repository_clear_cache
+    repository_add_cache
+    repository_remove_cache
+    repository_destroy
+    view_model_repository_create_with
+    view_model_repository_set_filter
+    view_model_repository_set_fields
+    view_model_repository_set_orderby
+    view_model_repository_set_ascending
+    view_model_repository_set_limit
+    view_model_repository_set_start_row
+    view_model_repository_set_window_name_of_add
+    view_model_repository_set_window_name_of_edit
+    view_model_repository_set_window_name_of_detail
+    view_model_repository_search
+    view_model_repository_cast
+    repository_sqlite3_create
+    view_model_record_create
