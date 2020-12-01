@@ -172,6 +172,10 @@ ret_t view_model_repository_gen_select(view_model_repository_t* vm, str_t* str) 
     str_append(str, " ORDER BY ");
     str_append(str, vm->orderby);
   }
+  
+  if (!vm->ascending) {
+    str_append(str, " DESC ");
+  }
 
   if (vm->limit > 0) {
     str_append(str, " LIMIT ");
