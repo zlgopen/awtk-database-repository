@@ -39,4 +39,4 @@ helper.set_deps(DEPENDS_LIBS).set_dll_def('src/repository.def').set_libs(['repos
 
 CustomWidgetSConscriptFiles = []
 SConscriptFiles = CustomWidgetSConscriptFiles + ['src/SConscript','demos/SConscript', 'tests/SConscript']
-SConscript(SConscriptFiles)
+helper.SConscript(SConscriptFiles)
