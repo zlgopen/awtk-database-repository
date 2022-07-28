@@ -87,11 +87,11 @@ static ret_t student_list_on_load_data(void* ctx, uint32_t index, widget_t* row)
   int english = object_get_prop_int(o, COL_ENGLISH, 0);
   const char* memo = object_get_prop_str(o, COL_MEMO);
 
-  widget_set_value(widget_lookup(row, "index", TRUE), index);
+  widget_set_value_int(widget_lookup(row, "index", TRUE), index);
   widget_set_text_utf8(widget_lookup(row, "name", TRUE), name);
-  widget_set_value(widget_lookup(row, "chinese", TRUE), chinese);
-  widget_set_value(widget_lookup(row, "math", TRUE), math);
-  widget_set_value(widget_lookup(row, "english", TRUE), english);
+  widget_set_value_int(widget_lookup(row, "chinese", TRUE), chinese);
+  widget_set_value_int(widget_lookup(row, "math", TRUE), math);
+  widget_set_value_int(widget_lookup(row, "english", TRUE), english);
   widget_set_text_utf8(widget_lookup(row, "memo", TRUE), memo);
 
   return RET_OK;
