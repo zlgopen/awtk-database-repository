@@ -60,9 +60,11 @@ static ret_t view_model_repository_set_prop(object_t* obj, const char* name, con
     return RET_OK;
   }
 
-  name = destruct_array_prop_name(name, &index);
-  record = repository_get_cache_object(r, index);
-  return_value_if_fail(record != NULL, RET_BAD_PARAMS);
+  if (tk_str_start_with(name, VIEW_MODEL_PROP_ITEMS".")) {
+    name = destruct_array_prop_name(name + sizeof(VIEW_MODEL_PROP_ITEMS), &index);
+    record = repository_get_cache_object(r, index);
+    return_value_if_fail(record != NULL, RET_BAD_PARAMS);
+  }
 
   return object_set_prop(record, name, v);
 }
@@ -96,14 +98,19 @@ static ret_t view_model_repository_get_prop(object_t* obj, const char* name, val
   } else if (tk_str_ieq(VIEW_MODEL_REPOSITORY_PROP_START_ROW, name)) {
     value_set_int(v, vm->start_row);
     return RET_OK;
+  } else if (tk_str_ieq(TK_OBJECT_PROP_SIZE, name)) {
+    value_set_int(v, vm->r->cache.size);
+    return RET_OK;
   } else if (tk_str_ieq(VIEW_MODEL_PROP_ITEMS, name)) {
-    value_set_uint32(v, repository_get_cache_nr(r));
+    value_set_object(v, obj);
     return RET_OK;
   }
 
-  name = destruct_array_prop_name(name, &index);
-  record = repository_get_cache_object(r, index);
-  return_value_if_fail(record != NULL, RET_BAD_PARAMS);
+  if (tk_str_start_with(name, VIEW_MODEL_PROP_ITEMS".")) {
+    name = destruct_array_prop_name(name + sizeof(VIEW_MODEL_PROP_ITEMS), &index);
+    record = repository_get_cache_object(r, index);
+    return_value_if_fail(record != NULL, RET_BAD_PARAMS);
+  }
 
   return object_get_prop(record, name, v);
 }
