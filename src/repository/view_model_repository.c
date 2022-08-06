@@ -108,6 +108,11 @@ static ret_t view_model_repository_get_prop(object_t* obj, const char* name, val
 
   if (tk_str_start_with(name, VIEW_MODEL_PROP_ITEMS".")) {
     name = destruct_array_prop_name(name + sizeof(VIEW_MODEL_PROP_ITEMS), &index);
+    if (index >= vm->r->cache.size) {
+      /*table view滚动到最后时，不需要的row也会绑定数据，index会超出正常范围*/
+      value_set_int(v, 0);
+      return RET_OK;
+    }
     record = repository_get_cache_object(r, index);
     return_value_if_fail(record != NULL, RET_BAD_PARAMS);
   }
