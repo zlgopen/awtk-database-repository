@@ -220,12 +220,12 @@ ret_t repository_select(repository_t* r, const char* sql) {
   return r->vt->select(r, sql);
 }
 
-ret_t repository_count(repository_t* r, const char* sql) {
+uint32_t repository_count(repository_t* r, const char* sql) {
   char select_all[512];
-  return_value_if_fail(r != NULL && r->vt != NULL && r->vt->count != NULL, RET_BAD_PARAMS);
+  return_value_if_fail(r != NULL && r->vt != NULL && r->vt->count != NULL, 0);
 
   if (sql == NULL) {
-    return_value_if_fail(r->table_name != NULL && r->primary_key != NULL, RET_BAD_PARAMS);
+    return_value_if_fail(r->table_name != NULL && r->primary_key != NULL, 0);
     tk_snprintf(select_all, sizeof(select_all), "SELECT COUNT(%s) FROM %s;", r->primary_key,
                 r->table_name);
     sql = select_all;
