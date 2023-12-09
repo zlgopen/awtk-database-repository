@@ -1,0 +1,20 @@
+<window  anim_hint="htranslate" text="User New" v-model="record(name='', Chinese=70, Math=80, English=90, memo='')" 
+  children_layout="default(h=40,c=2,m=5,s=10)">
+ <label text="姓名:"/>
+ <edit name="name" v-data:text="{name, Trigger=Changing}" text="" tips="" min="3" max="10"/>
+  
+ <label text="语文:"/>
+ <edit input_type="int" min="0" max="100" v-data:text="{Chinese, Trigger=Changing}"/>
+
+ <label text="数学:"/>
+ <edit input_type="int" min="0" max="100" v-data:text="{Math, Trigger=Changing}"/>
+
+ <label text="英语:"/>
+ <edit input_type="int" min="0" max="100" v-data:text="{English, Trigger=Changing}"/>
+ 
+ <label text="备注:"/>
+ <edit v-data:text="{memo, Trigger=Changing}" text=""/>
+  
+ <button name="add" text="确定" v-on:click="{add, CloseWindow=true, args=len(name) >= 3 && len(name) <= 10}"/>
+ <button name="cancel" text="取消" v-on:click="{nothing, CloseWindow=true}"/>
+</window>

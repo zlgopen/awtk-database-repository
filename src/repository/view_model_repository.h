@@ -93,6 +93,16 @@ typedef struct _view_model_repository_t {
 view_model_t* view_model_repository_create_with(repository_t* r);
 
 /**
+ * @method view_model_repository_create_with_req
+ * 创建repository view model对象。
+ * @annotation ["constructor"]
+ * @param {navigator_request_t*}  req navigator_request对象。
+ * 
+ * @return {view_model_t} 返回view_model_t对象。
+ */
+view_model_t *view_model_repository_create_with_req(navigator_request_t *req);
+
+/**
  * @method view_model_repository_set_filter 
  * 设置过滤条件(SQL的WHERE语句)。
  *

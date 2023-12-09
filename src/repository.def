@@ -23,6 +23,7 @@ EXPORTS
     repository_remove_cache
     repository_destroy
     view_model_repository_create_with
+    view_model_repository_create_with_req
     view_model_repository_set_filter
     view_model_repository_set_fields
     view_model_repository_set_orderby

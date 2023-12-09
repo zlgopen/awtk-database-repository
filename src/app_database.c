@@ -72,6 +72,10 @@ ret_t prepare_database_file(const char* appname, const char* dbname, char dbfile
 
 #include "sqlite3/repository_sqlite3.h"
 
+#include "mvvm/mvvm.h"
+#include "repository/view_model_record.h"
+#include "repository/view_model_repository.h"
+
 static sqlite3* s_sqlite3_db;
 
 ret_t app_database_init(const char* appname, const char* dbname) {
@@ -83,6 +87,9 @@ ret_t app_database_init(const char* appname, const char* dbname) {
   prepare_database_file(appname, dbname, dbfilename);
 
   ENSURE(sqlite3_open(dbfilename, &s_sqlite3_db) == SQLITE_OK);
+
+  view_model_factory_register("record", view_model_record_create);
+  view_model_factory_register("database", view_model_repository_create_with_req);
 
   return RET_OK;
 }

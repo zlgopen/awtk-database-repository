@@ -40,57 +40,35 @@ design/default/data/students.db
   app_database_init("student_list_mvvm", "students.db");
 ```
 
-### 1.2 注册 view model
-
-```c
-  /*注册单条记录的 view model，所有的表都可以共用。*/
-  view_model_factory_register("record", view_model_record_create);
-  /*不同的列表需要用不同的 ViewModel*/
-  view_model_factory_register("student_list", student_list_view_model_create);
-```
-
-## 2 实现 view model
-
-### 2.1 创建 list view model
-
-在创建 list view model 时，可以参考下面的模版进行修改，根据自己的需要设置相关参数即可：
-
-```c
-view_model_t *student_list_view_model_create(navigator_request_t *req) {
-  view_model_t* vm = NULL;
-  view_model_repository_t* view_model = NULL;
-  repository_t* repository = app_database_create_repository("scores", "name");
-
-  vm = view_model_repository_create_with(repository);
-
-  view_model = VIEW_MODEL_REPOSITORY(vm);
-  /*设置过滤条件*/
-  view_model_repository_set_filter(view_model, "Chinese > 80");
-  /*设置排序规则*/
-  view_model_repository_set_orderby(view_model, "Chinese");
-  /*加载数据*/
-  view_model_repository_search(view_model);
-
-  /*如果需要支持“新建”操作，请设置点击“新建”按钮时打开窗口的名称*/
-  view_model_repository_set_window_name_of_add(view_model, "student_add");
-  /*如果需要支持“编辑”操作，请设置点击“编辑”按钮时打开窗口的名称*/
-  view_model_repository_set_window_name_of_edit(view_model, "student_edit");
-  /*如果需要支持“详情”操作，请设置点击“详情”按钮时打开窗口的名称*/
-  view_model_repository_set_window_name_of_detail(view_model, "student_detail");
-
-  return vm;
-}
-```
-
-### 2.2 创建 record view model
-
-单条记录共享 view\_model\_record，不需要自己实现，但是要注册一下（参考：注册 view model)。
-
-## 3 实现 view
+## 2 实现 view
 
 视图中的数据绑定和命令绑定和其它 MVVM 应用一样，这里列出 view model 支持的属性和命令。
 
-### 3.1 view_model_repository 支持的属性和命令
+database 视图模型的初始化参数有：
+
+ * table: 数据库表名。
+ * key: 主键字段名。
+ * start: 起始行。
+ * count: 加载的行数。
+ * filter: 过滤条件。
+ * fields: 加载的字段。
+ * orderby: 排序方式。
+ * ascending: 是否升序排列。
+  
+如：
+```xml
+<window theme="main" v-model="database(table=scores, key=name, start=0, count=100, filter='Chinese > 80', orderby=Chinese, fields='*')" >
+```
+
+record 视图模型一般不需要初始化参数，只有创建记录才需要，此时需要指定各个字段的默认值。
+ 
+如：
+```xml
+<window  anim_hint="htranslate" text="User New" v-model="record(name='', Chinese=70, Math=80, English=90, memo='')" 
+  children_layout="default(h=40,c=2,m=5,s=10)">
+```
+
+### 2.1 view_model_repository 支持的属性和命令
 
  * 支持的属性：
     * limit: 限制最多加载的条数
@@ -99,8 +77,7 @@ view_model_t *student_list_view_model_create(navigator_request_t *req) {
     * orderby: 排序方式，缺省主键。
     * ascending: 是否升序排列。
     * start_row: 从指定行查询数据。
-    * 数据库记录中的字段(适用于列表中显示)。
-
+    * 数据库记录中的字段（适用于列表中显示）。
 
 * 支持的命令：
     * search: 用当前条件查询
@@ -122,6 +99,6 @@ view_model_t *student_list_view_model_create(navigator_request_t *req) {
     * save 用于更新记录。
 
 > 具体用法请参考：
-> * design/default/ui/student_add.xml
-> * design/default/ui/student_edit.xml
-> * design/default/ui/student_detail.xml
+> * design/default/ui/scores_add.xml
+> * design/default/ui/scores_edit.xml
+> * design/default/ui/scores_detail.xml

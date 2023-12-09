@@ -21,11 +21,13 @@
 
 #include "tkc/mem.h"
 #include "tkc/utils.h"
+#include "tkc/func_call_parser.h"
 #include "mvvm/base/utils.h"
 #include "view_model_repository.h"
 #include "mvvm/base/navigator.h"
 #include "mvvm/base/navigator_request.h"
 #include "repository/repository_mvvm_const.h"
+#include "app_database.h"
 
 static ret_t view_model_repository_set_prop(object_t* obj, const char* name, const value_t* v) {
   uint32_t index = 0;
@@ -60,7 +62,7 @@ static ret_t view_model_repository_set_prop(object_t* obj, const char* name, con
     return RET_OK;
   }
 
-  if (tk_str_start_with(name, VIEW_MODEL_PROP_ITEMS".")) {
+  if (tk_str_start_with(name, VIEW_MODEL_PROP_ITEMS ".")) {
     name = destruct_array_prop_name(name + sizeof(VIEW_MODEL_PROP_ITEMS), &index);
     record = repository_get_cache_object(r, index);
     return_value_if_fail(record != NULL, RET_BAD_PARAMS);
@@ -106,7 +108,7 @@ static ret_t view_model_repository_get_prop(object_t* obj, const char* name, val
     return RET_OK;
   }
 
-  if (tk_str_start_with(name, VIEW_MODEL_PROP_ITEMS".")) {
+  if (tk_str_start_with(name, VIEW_MODEL_PROP_ITEMS ".")) {
     name = destruct_array_prop_name(name + sizeof(VIEW_MODEL_PROP_ITEMS), &index);
     if (index >= vm->r->cache.size) {
       /*table view滚动到最后时，不需要的row也会绑定数据，index会超出正常范围*/
@@ -184,7 +186,7 @@ ret_t view_model_repository_gen_select(view_model_repository_t* vm, str_t* str) 
     str_append(str, " ORDER BY ");
     str_append(str, vm->orderby);
   }
-  
+
   if (!vm->ascending) {
     str_append(str, " DESC ");
   }
@@ -249,6 +251,7 @@ static ret_t view_model_repository_on_destroy(object_t* obj) {
   view_model_repository_t* vm = (view_model_repository_t*)(obj);
   return_value_if_fail(vm != NULL, RET_BAD_PARAMS);
 
+  view_model_deinit(VIEW_MODEL(vm));
   emitter_off_by_ctx(EMITTER(vm->r), vm);
   repository_destroy(vm->r);
 
@@ -280,6 +283,7 @@ view_model_t* view_model_repository_create_with(repository_t* r) {
     view_model_repository->limit = 1000;
     view_model_repository->start_row = 0;
     view_model_repository->ascending = TRUE;
+    view_model_init(vm);
 
     return vm;
   }
@@ -357,4 +361,57 @@ view_model_repository_t* view_model_repository_cast(view_model_t* vm) {
   return_value_if_fail(vm != NULL && OBJECT(vm)->vt == &s_view_model_repository_vtable, NULL);
 
   return (view_model_repository_t*)vm;
+}
+
+view_model_t* view_model_repository_create_with_req(navigator_request_t* req) {
+  view_model_t* vm = NULL;
+  char target[256] = {0};
+  view_model_repository_t* view_model = NULL;
+  const char* type_and_args = tk_object_get_prop_str(req->args, NAVIGATOR_ARG_VIEW_MODEL_TYPE);
+  tk_object_t* args = func_call_parse(type_and_args, tk_strlen(type_and_args));
+  const char* table = tk_object_get_prop_str(args, "table");
+  const char* key = tk_object_get_prop_str(args, "key");
+  uint32_t start = tk_object_get_prop_int(args, "start", 0);
+  uint32_t count = tk_object_get_prop_int(args, "count", 100);
+  const char* filter = tk_object_get_prop_str(args, "filter");
+  const char* orderby = tk_object_get_prop_str(args, "orderby");
+  const char* fields = tk_object_get_prop_str(args, "fields");
+  repository_t* repository = app_database_create_repository(table, key);
+  return_value_if_fail(repository != NULL, NULL);
+
+  vm = view_model_repository_create_with(repository);
+
+  view_model = VIEW_MODEL_REPOSITORY(vm);
+
+  if (filter != NULL) {
+    view_model_repository_set_filter(view_model, filter);
+  }
+
+  if (orderby != NULL) {
+    view_model_repository_set_orderby(view_model, orderby);
+  }
+
+  if (fields != NULL) {
+    view_model_repository_set_fields(view_model, fields);
+  }
+
+  view_model_repository_set_limit(view_model, count);
+  view_model_repository_set_start_row(view_model, start);
+
+  /*加载数据*/
+  view_model_repository_search(view_model);
+
+  /*如果需要支持“新建”操作，请设置点击“新建”按钮时打开窗口的名称*/
+  tk_snprintf(target, sizeof(target), "%s_add", table);
+  view_model_repository_set_window_name_of_add(view_model, target);
+
+  /*如果需要支持“编辑”操作，请设置点击“编辑”按钮时打开窗口的名称*/
+  tk_snprintf(target, sizeof(target), "%s_edit", table);
+  view_model_repository_set_window_name_of_edit(view_model, target);
+
+  /*如果需要支持“详情”操作，请设置点击“详情”按钮时打开窗口的名称*/
+  tk_snprintf(target, sizeof(target), "%s_detail", table);
+  view_model_repository_set_window_name_of_detail(view_model, target);
+
+  return vm;
 }

@@ -1,31 +1,30 @@
-<window theme="main" v-model="student_list">
+<window theme="main" v-model="database(table=scores, key=name, start=0, count=100, filter='Chinese > 80', orderby=Chinese, fields='*')" >
   <view x="10" y="10" w="-20" h="80" children_layout="default(r=2,c=6,s=5,m=5)">
-    <label text="Filter"/>
+    <label text="过滤"/>
     <edit v-data:text="{filter}"/>
-    <label text="SortBy"/>
+    <label text="排序"/>
     <edit v-data:text="{orderby}"/>
-    <label text="Start"/>
+    <label text="开始行"/>
     <edit v-data:text="{start_row}"/>
-    <label text="Rows"/>
+    <label text="行数"/>
     <edit v-data:text="{limit}"/>
-    <check_button text="Asceding" v-data:value="{ascending}"/>
-    <button name="search" text="Search" v-on:click="{search}"/>
+    <check_button text="升序" v-data:value="{ascending}"/>
+    <button name="search" text="查询" v-on:click="{search}"/>
   </view>
 
   <table_view x="10" y="90" w="-20" h="-150">
     <table_header x="0"  y="0" w="100%" h="30" name="title" children_layout="default(rows=1,cols=0,s=4)">
-      <label w="8%" text="Index"/>
-      <label w="30%" text="Name"/>
-      <label w="10%" text="Chinese"/>
-      <label w="10%" text="Math"/>
-      <label w="10%" text="English"/>
-      <label w="24%" text="Memo"/>
-      <label w="8%" text="Action"/>
+      <label w="8%" text="序号"/>
+      <label w="30%" text="姓名"/>
+      <label w="10%" text="语文"/>
+      <label w="10%" text="数学"/>
+      <label w="10%" text="英语"/>
+      <label w="24%" text="备注"/>
     </table_header>
 
     <table_client name="table_client" x="0"  y="30" w="-12" h="-30" row_height="40">
       <table_row w="100%" h="40" children_layout="default(rows=1,cols=0,s=4)" v-for="{items}">
-       <slidable_row  w="100%" h="100%">
+       <slidable_row  w="100%" h="100%" v-data:style="{int(index%2) ? 'even':'odd'}">
          <column children_layout="default(rows=1,cols=0,s=4)">
           <label w="8%" h="100%" v-data:text="{index}"/>
           <label w="30%" h="100%" v-data:text="{item.name}"/>
@@ -34,9 +33,9 @@
           <label w="10%" h="100%" v-data:text="{item.English}"/>
           <label w="24%" h="100%" v-data:text="{item.memo}"/>
         </column>
-        <button w="80" v-on:click="{detail}" tr_text="Detail" />
-        <button w="80" v-on:click="{edit}" tr_text="Edit" />
-        <confirmable_button w="80" v-on:click="{remove}" style="remove" tr_text="Remove" popup_win_w="260"/>
+        <button w="80" v-on:click="{detail}" tr_text="详情" style="rect" />
+        <button w="80" v-on:click="{edit}" tr_text="编辑" style="rect" />
+        <confirmable_button w="80" v-on:click="{remove}" style="remove" tr_text="删除" popup_win_w="260"/>
        </slidable_row>
 
       </table_row>
@@ -44,8 +43,8 @@
     <scroll_bar_d name="vbar" x="right" y="30" w="12" h="-30" value="0"/>
   </table_view>
   <view x="10" y="b:10" w="-20" h="40" children_layout="default(r=1,c=3,s=5,m=5)">
-    <button name="clear" text="Clear" v-on:click="{clear}"/>
-    <button name="add" text="Add" v-on:click="{add}"/>
-    <button name="quit" text="Quit" v-on:click="{nothing, CloseWindow=True, QuitApp=true}"/>
+    <button name="clear" text="删除全部" v-on:click="{clear}"/>
+    <button name="add" text="增加" v-on:click="{add}"/>
+    <button name="quit" text="退出" v-on:click="{nothing, QuitApp=true}"/>
   </view>
 </window>

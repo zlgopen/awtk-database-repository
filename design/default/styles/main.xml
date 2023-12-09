@@ -14,3 +14,12 @@
     <over text_color="#ffffff" bg_color="#bb0000"/>
   </style>
 </confirmable_button>
+
+<slidable_row>
+  <style name="odd">
+    <normal bg_color="#fafafa" />
+  </style>
+  <style name="even">
+    <normal bg_color="#f0f0f0" />
+  </style>
+</slidable_row>

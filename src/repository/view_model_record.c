@@ -20,14 +20,17 @@
  */
 
 #include "tkc/mem.h"
+#include "tkc/fscript.h"
 #include "tkc/utils.h"
 #include "tkc/object_default.h"
+#include "tkc/func_call_parser.h"
 #include "repository/view_model_record.h"
 #include "repository/repository_mvvm_const.h"
 
 static ret_t view_model_record_on_destroy(object_t* obj) {
   view_model_record_t* record = VIEW_MODEL_RECORD(obj);
 
+  view_model_deinit(VIEW_MODEL(record));
   OBJECT_UNREF(record->o);
 
   return RET_OK;
@@ -53,6 +56,15 @@ static ret_t view_model_record_get_prop(object_t* obj, const char* name, value_t
 static bool_t view_model_record_can_exec(object_t* obj, const char* name, const char* args) {
   view_model_record_t* record = VIEW_MODEL_RECORD(obj);
   return_value_if_fail(obj != NULL && name != NULL, FALSE);
+
+  if (args != NULL) {
+    value_t v;
+    if (fscript_eval(record->o, args, &v) == RET_OK) {
+      if (!value_bool(&v)) {
+        return FALSE;
+      }
+    }
+  }
 
   if (tk_str_ieq(OBJECT_CMD_ADD, name)) {
     return !repository_exist(record->r, record->o);
@@ -99,6 +111,8 @@ view_model_t* view_model_record_create(navigator_request_t* req) {
   object_t* model = object_create(&s_object_vtable);
   view_model_record_t* record = VIEW_MODEL_RECORD(model);
   view_model_t* view_model = VIEW_MODEL(model);
+  const char* type_and_args = tk_object_get_prop_str(req->args, NAVIGATOR_ARG_VIEW_MODEL_TYPE);
+
   return_value_if_fail(record != NULL, NULL);
 
   assert(req != NULL);
@@ -111,8 +125,14 @@ view_model_t* view_model_record_create(navigator_request_t* req) {
   if (record->o != NULL) {
     record->o = object_ref(record->o);
   } else {
-    record->o = repository_create_object(record->r);
+    if (type_and_args != NULL && strchr(type_and_args, '(') != NULL) {
+      record->o = func_call_parse(type_and_args, tk_strlen(type_and_args));
+    } else {
+      record->o = repository_create_object(record->r);
+    }
   }
+
+  view_model_init(view_model);
 
   return view_model;
 }
