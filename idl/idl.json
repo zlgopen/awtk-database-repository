@@ -193,6 +193,27 @@
             "desc": "repository对象。"
           },
           {
+            "type": "const char*",
+            "name": "filter",
+            "desc": "过滤器。"
+          }
+        ],
+        "annotation": {},
+        "desc": "删除全部数据。",
+        "name": "repository_clear_ex",
+        "return": {
+          "type": "ret_t",
+          "desc": "返回RET_OK表示成功，否则表示失败。"
+        }
+      },
+      {
+        "params": [
+          {
+            "type": "repository_t*",
+            "name": "r",
+            "desc": "repository对象。"
+          },
+          {
             "type": "object_t*",
             "name": "o",
             "desc": "数据记录对象。"

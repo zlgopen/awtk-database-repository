@@ -181,8 +181,21 @@ ret_t repository_remove(repository_t* r, object_t* o) {
   return ret;
 }
 
+ret_t repository_clear_ex(repository_t* r, const char* filter) {
+  char sql[1024] = {0};
+  return_value_if_fail(r != NULL && r->table_name != NULL, RET_BAD_PARAMS);
+
+  if (filter != NULL) {
+    tk_snprintf(sql, sizeof(sql), "DELETE FROM %s WHERE %s", r->table_name, filter);
+  } else {
+    tk_snprintf(sql, sizeof(sql), "DELETE FROM %s", r->table_name);
+  }
+
+  return repository_exec_sql(r, sql);
+}
+
 ret_t repository_clear(repository_t* r) {
-  char sql[256];
+  char sql[256] = {0};
   return_value_if_fail(r != NULL && r->table_name != NULL, RET_BAD_PARAMS);
   tk_snprintf(sql, sizeof(sql), "DELETE FROM %s", r->table_name);
 

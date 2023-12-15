@@ -129,6 +129,18 @@ ret_t repository_remove(repository_t* r, object_t* o);
 ret_t repository_clear(repository_t* r);
 
 /**
+ * @method repository_clear_ex
+ *
+ * 删除全部数据。
+ *
+ * @param {repository_t*} r repository对象。
+ * @param {const char*} filter 过滤器。
+ * 
+ * @return {ret_t} 返回RET_OK表示成功，否则表示失败。
+ */
+ret_t repository_clear_ex(repository_t* r, const char* filter);
+
+/**
  * @method repository_exist
  *
  * 检查一条记录是否已经存在。

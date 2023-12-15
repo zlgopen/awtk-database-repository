@@ -215,13 +215,21 @@ ret_t view_model_repository_search(view_model_repository_t* vm) {
   return RET_OK;
 }
 
+static ret_t view_model_repository_clear(view_model_repository_t* vm) {
+  return_value_if_fail(vm != NULL, RET_BAD_PARAMS);
+
+  repository_clear_ex(vm->r, vm->filter);
+
+  return RET_OK;
+}
+
 static ret_t view_model_repository_exec(object_t* obj, const char* name, const char* args) {
   view_model_repository_t* vm = (view_model_repository_t*)(obj);
   repository_t* r = vm->r;
 
   if (tk_str_ieq(OBJECT_CMD_CLEAR, name)) {
-    repository_clear(r);
-    repository_select(r, NULL);
+    view_model_repository_clear(vm);
+    view_model_repository_search(vm);
     return RET_ITEMS_CHANGED;
   } else if (tk_str_ieq(OBJECT_CMD_REMOVE, name)) {
     repository_remove_index(r, tk_atoi(args));

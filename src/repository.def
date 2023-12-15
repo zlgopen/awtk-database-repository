@@ -9,6 +9,7 @@ EXPORTS
     repository_update
     repository_remove
     repository_clear
+    repository_clear_ex
     repository_exist
     repository_exec_sql
     repository_trans_begin
