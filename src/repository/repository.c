@@ -290,9 +290,9 @@ ret_t repository_add_cache(repository_t* r, object_t* o) {
 
 ret_t repository_remove_cache(repository_t* r, object_t* o) {
   return_value_if_fail(r != NULL && o != NULL, RET_FAIL);
-
+  
+  ENSURE(o->ref_count == 1);
   if (darray_remove(&(r->cache), o) == RET_OK) {
-    OBJECT_UNREF(o);
   }
 
   return RET_OK;

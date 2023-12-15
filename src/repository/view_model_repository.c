@@ -46,7 +46,7 @@ static ret_t view_model_repository_set_prop(object_t* obj, const char* name, con
   } else if (tk_str_ieq(VIEW_MODEL_REPOSITORY_PROP_FIELDS, name)) {
     view_model_repository_set_fields(vm, value_str(v));
     return RET_OK;
-  } else if (tk_str_ieq(VIEW_MODEL_REPOSITORY_PROP_orderby, name)) {
+  } else if (tk_str_ieq(VIEW_MODEL_REPOSITORY_PROP_ORDERBY, name)) {
     view_model_repository_set_orderby(vm, value_str(v));
     return RET_OK;
   } else if (tk_str_ieq(VIEW_MODEL_REPOSITORY_PROP_ASCENDING, name)) {
@@ -88,7 +88,7 @@ static ret_t view_model_repository_get_prop(object_t* obj, const char* name, val
   } else if (tk_str_ieq(VIEW_MODEL_REPOSITORY_PROP_FIELDS, name)) {
     value_set_str(v, vm->fields);
     return RET_OK;
-  } else if (tk_str_ieq(VIEW_MODEL_REPOSITORY_PROP_orderby, name)) {
+  } else if (tk_str_ieq(VIEW_MODEL_REPOSITORY_PROP_ORDERBY, name)) {
     value_set_str(v, vm->orderby);
     return RET_OK;
   } else if (tk_str_ieq(VIEW_MODEL_REPOSITORY_PROP_ASCENDING, name)) {

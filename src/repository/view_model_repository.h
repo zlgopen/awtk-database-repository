@@ -63,7 +63,7 @@ typedef struct _view_model_repository_t {
 /*加载的字段。缺省*，加载全部。*/
 #define VIEW_MODEL_REPOSITORY_PROP_FIELDS "fields"
 /*排序方式，缺省主键。*/
-#define VIEW_MODEL_REPOSITORY_PROP_orderby "orderby"
+#define VIEW_MODEL_REPOSITORY_PROP_ORDERBY "orderby"
 /*是否升序排列。*/
 #define VIEW_MODEL_REPOSITORY_PROP_ASCENDING "ascending"
 /*从指定行查询数据。*/
