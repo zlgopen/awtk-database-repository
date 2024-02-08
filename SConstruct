@@ -8,11 +8,6 @@ DEPENDS_LIBS = [
     'shared_libs': ['sqlite3']
   },
   {
-    "root" : '../awtk-csv-file',
-    'static_libs': ['csv'],
-    'shared_libs': []
-  },
-  {
     "root" : '../awtk-mvvm',
     'shared_libs': ['mvvm'],
     'static_libs': []
