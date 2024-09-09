@@ -266,18 +266,15 @@ static ret_t view_model_repository_on_destroy(object_t* obj) {
   return view_model_array_deinit(VIEW_MODEL(obj));
 }
 
-static const object_vtable_t s_view_model_repository_vtable = {"view_model_repository_t",
-                                                               "view_model_repository_t",
-                                                               sizeof(view_model_repository_t),
-                                                               TRUE,
-                                                               view_model_repository_on_destroy,
-                                                               NULL,
-                                                               view_model_repository_get_prop,
-                                                               view_model_repository_set_prop,
-                                                               NULL,
-                                                               NULL,
-                                                               view_model_repository_can_exec,
-                                                               view_model_repository_exec};
+static const object_vtable_t s_view_model_repository_vtable = {.type = "view_model_repository_t",
+                                                               .desc = "view_model_repository_t",
+                                                               .size = sizeof(view_model_repository_t),
+                                                               .is_collection = TRUE,
+                                                               .on_destroy = view_model_repository_on_destroy,
+                                                               .get_prop = view_model_repository_get_prop,
+                                                               .set_prop = view_model_repository_set_prop,
+                                                               .can_exec = view_model_repository_can_exec,
+                                                               .exec = view_model_repository_exec};
 
 view_model_t* view_model_repository_create_with(repository_t* r) {
   return_value_if_fail(r != NULL, NULL);
