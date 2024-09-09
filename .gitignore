@@ -31,3 +31,5 @@ bin/image*
 bin/hello*
 .vscode
 .vs
+src/repository.def
+idl/idl.json
